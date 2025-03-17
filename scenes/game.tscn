@@ -1,21 +1,21 @@
 [gd_scene load_steps=2 format=3 uid="uid://ciwqguosxv4x0"]
 
-[ext_resource type="PackedScene" uid="uid://cniwwdn3r1yuw" path="res://ant.tscn" id="1_gabqt"]
+[ext_resource type="PackedScene" uid="uid://cniwwdn3r1yuw" path="res://scenes/ant.tscn" id="1_uwrxv"]
 
 [node name="Game" type="Node2D"]
 
-[node name="Ant3" parent="." instance=ExtResource("1_gabqt")]
+[node name="Ant3" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(500, 373)
 scale = Vector2(0.159992, 0.179321)
 
-[node name="Ant2" parent="." instance=ExtResource("1_gabqt")]
+[node name="Ant2" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(338, 338)
 scale = Vector2(0.398692, 0.4)
 
-[node name="Ant4" parent="." instance=ExtResource("1_gabqt")]
+[node name="Ant4" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(430, 466)
 scale = Vector2(0.398692, 0.4)
 
-[node name="Ant5" parent="." instance=ExtResource("1_gabqt")]
+[node name="Ant5" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(554.077, 433.611)
 scale = Vector2(0.161843, 0.181395)
