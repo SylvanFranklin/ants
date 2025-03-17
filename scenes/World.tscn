@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4d55ku5nppw8"]
+[gd_scene load_steps=5 format=3 uid="uid://b4d55ku5nppw8"]
 
 [ext_resource type="Script" path="res://scripts/home.gd" id="2_f4nbc"]
+[ext_resource type="PackedScene" uid="uid://cig2p7pbgrkqt" path="res://food.tscn" id="2_peged"]
 
 [sub_resource type="Gradient" id="Gradient_32lhk"]
 colors = PackedColorArray(1, 0, 1, 1, 1, 0, 1, 1)
@@ -8,30 +9,24 @@ colors = PackedColorArray(1, 0, 1, 1, 1, 0, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7g83o"]
 gradient = SubResource("Gradient_32lhk")
 
-[sub_resource type="Gradient" id="Gradient_d1c63"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 1, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1lgw5"]
-gradient = SubResource("Gradient_d1c63")
-
 [node name="World" type="Node2D"]
+
+[node name="Food" parent="." instance=ExtResource("2_peged")]
+position = Vector2(-779, -196)
+scale = Vector2(3.15627, 3.15583)
 
 [node name="Home" type="Sprite2D" parent="."]
 position = Vector2(111, 120)
 texture = SubResource("GradientTexture2D_7g83o")
 script = ExtResource("2_f4nbc")
 
-[node name="Food" type="Sprite2D" parent="."]
-position = Vector2(1033, 246)
-texture = SubResource("GradientTexture2D_1lgw5")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.4, 0.4)
-
 [node name="spawner" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.734
+wait_time = 0.863
 autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(1.00179, 1.00286)
+zoom = Vector2(0.4, 0.4)
 
 [connection signal="timeout" from="spawner" to="Home" method="_on_timer_timeout"]

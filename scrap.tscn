@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccvwgkulpjbym"]
+
+[sub_resource type="Gradient" id="Gradient_d1c63"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gkous"]
+gradient = SubResource("Gradient_d1c63")
+
+[node name="scrap" type="Node2D"]
+
+[node name="Food" type="Sprite2D" parent="."]
+position = Vector2(-2, 0)
+scale = Vector2(-0.335402, 0.32)
+texture = SubResource("GradientTexture2D_gkous")

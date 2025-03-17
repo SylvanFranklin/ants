@@ -464,7 +464,7 @@ position = Vector2(0, 21)
 shape = SubResource("CapsuleShape2D_cojho")
 
 [node name="MoneSquirter" type="Timer" parent="."]
-wait_time = 0.467
+wait_time = 0.48
 autostart = true
 
 [connection signal="timeout" from="MoneSquirter" to="." method="_on_mone_squirter_timeout"]
