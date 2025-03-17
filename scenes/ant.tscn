@@ -1,6 +1,6 @@
-[gd_scene load_steps=66 format=3 uid="uid://cniwwdn3r1yuw"]
+[gd_scene load_steps=67 format=3 uid="uid://cniwwdn3r1yuw"]
 
-[ext_resource type="Script" uid="uid://dybwc454ol7y1" path="res://scripts/ant.gd" id="1_rkdrl"]
+[ext_resource type="Script" path="res://scenes/ant.gd" id="1_l0lfl"]
 [ext_resource type="Texture2D" uid="uid://doas46bnjha81" path="res://visual/ant.png" id="2_ddf54"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wauxh"]
@@ -445,10 +445,26 @@ animations = [{
 "speed": 100.0
 }]
 
-[node name="Ant" type="Node2D"]
-script = ExtResource("1_rkdrl")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cojho"]
+radius = 54.0
+height = 194.0
+
+[node name="Ant" type="CharacterBody2D"]
+scale = Vector2(0.199998, 0.199998)
+motion_mode = 1
+script = ExtResource("1_l0lfl")
 
 [node name="FrameAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gmg07")
 autoplay = "default"
 frame_progress = 0.348641
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 21)
+shape = SubResource("CapsuleShape2D_cojho")
+
+[node name="MoneSquirter" type="Timer" parent="."]
+wait_time = 0.467
+autostart = true
+
+[connection signal="timeout" from="MoneSquirter" to="." method="_on_mone_squirter_timeout"]

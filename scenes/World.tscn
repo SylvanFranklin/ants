@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4d55ku5nppw8"]
 
-[ext_resource type="PackedScene" uid="uid://cniwwdn3r1yuw" path="res://scenes/ant.tscn" id="1_kqs1s"]
+[ext_resource type="Script" path="res://scripts/home.gd" id="2_f4nbc"]
 
 [sub_resource type="Gradient" id="Gradient_32lhk"]
 colors = PackedColorArray(1, 0, 1, 1, 1, 0, 1, 1)
@@ -17,13 +17,21 @@ gradient = SubResource("Gradient_d1c63")
 
 [node name="World" type="Node2D"]
 
-[node name="Ant" parent="." instance=ExtResource("1_kqs1s")]
-position = Vector2(516, 293)
-
 [node name="Home" type="Sprite2D" parent="."]
 position = Vector2(111, 120)
 texture = SubResource("GradientTexture2D_7g83o")
+script = ExtResource("2_f4nbc")
 
 [node name="Food" type="Sprite2D" parent="."]
 position = Vector2(1033, 246)
 texture = SubResource("GradientTexture2D_1lgw5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
+
+[node name="spawner" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.734
+autostart = true
+
+[connection signal="timeout" from="spawner" to="Home" method="_on_timer_timeout"]

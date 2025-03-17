@@ -15,9 +15,6 @@ func _ready() -> void:
 	xDir = (2*randf())-1
 	yDir = (2*randf())-1
 	velocity = Vector2(xDir,yDir).normalized() * speed
-	
-	
-	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

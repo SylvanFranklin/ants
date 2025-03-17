@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://lhclfcdl2yi7"]
+
+[sub_resource type="Gradient" id="Gradient_gg7v3"]
+offsets = PackedFloat32Array(0, 0.0136612, 0.998634, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.780155, 0.0545049, 0.488645, 1, 0.811457, 0.0566918, 0.508251, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tuwmt"]
+gradient = SubResource("Gradient_gg7v3")
+
+[node name="mone" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0800014, 0.0800014)
+texture = SubResource("GradientTexture2D_tuwmt")
