@@ -4,27 +4,32 @@ const SPEED = 2.0
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 const MONE = preload("res://mone.tscn")
 const SCRAP = preload("res://scrap.tscn")
+@onready var world_boundry: Area2D = $WorldBoundry
 
 func _ready():
 	velocity = direction.normalized() * SPEED
 
 func _physics_process(delta: float) -> void:
-	explore()
+	
+	if randi() % 50 == 0: 
+		explore()
 		
 	velocity = direction.normalized() * SPEED;
 	look_at(global_position + direction)
-	position += velocity
-	
+	position += velocity * (randf() + 0.2) 
 	#var collision = move_and_collide(velocity * delta)
 	#if collision:
 		#velocity = velocity.bounce(collision.get_normal())
 		#if collision.get_collider().has_method("hit"):
 			#collision.get_collider().hit()
-			
 	
 func explore() -> void: 
-	direction.x = sin(direction.x) * 2
-
+	if randi() % 2 == 0:
+		direction += direction.orthogonal() * 0.4
+	else:
+		direction -= direction.orthogonal() * 0.4
+		
+	
 
 func _on_mone_squirter_timeout() -> void:
 	var mone = MONE.instantiate() 
