@@ -1,47 +1,58 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4d55ku5nppw8"]
+[gd_scene load_steps=8 format=3 uid="uid://b4d55ku5nppw8"]
 
-[ext_resource type="Script" path="res://scripts/home.gd" id="2_f4nbc"]
 [ext_resource type="PackedScene" uid="uid://cig2p7pbgrkqt" path="res://food.tscn" id="2_peged"]
+[ext_resource type="PackedScene" uid="uid://dw85u7eokh4jt" path="res://home.tscn" id="3_u110x"]
 [ext_resource type="Script" path="res://scenes/world_boundry.gd" id="3_ww8lp"]
 
-[sub_resource type="Gradient" id="Gradient_32lhk"]
-colors = PackedColorArray(1, 0, 1, 1, 1, 0, 1, 1)
+[sub_resource type="Gradient" id="Gradient_qjr8r"]
+offsets = PackedFloat32Array(0.035, 0.98, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.0635776, 0.449459, 0.589842, 0.12549, 0.265868, 0.522716, 0.493748, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_7g83o"]
-gradient = SubResource("Gradient_32lhk")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bdaco"]
+noise_type = 4
+frequency = 0.0052
+fractal_type = 3
+fractal_gain = 10.0
+fractal_ping_pong_strength = 5.0
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8iku8"]
+color_ramp = SubResource("Gradient_qjr8r")
+noise = SubResource("FastNoiseLite_bdaco")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8eilv"]
 size = Vector2(2874, 1619.5)
 
 [node name="World" type="Node2D"]
+position = Vector2(-10, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(575.5, 331)
+scale = Vector2(2.20117, 1.27344)
+texture = SubResource("NoiseTexture2D_8iku8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -1)
 rotation = 3.14159
 scale = Vector2(257.519, 3480.4)
 anchor_mode = 0
-zoom = Vector2(0.4, 0.4)
 
 [node name="Food" parent="." instance=ExtResource("2_peged")]
-position = Vector2(398, 829)
+position = Vector2(444, 330)
 scale = Vector2(1.90613, 1.84253)
 
-[node name="Home" type="Sprite2D" parent="."]
-position = Vector2(2284, 986)
-texture = SubResource("GradientTexture2D_7g83o")
-script = ExtResource("2_f4nbc")
-
-[node name="spawner" type="Timer" parent="."]
-process_callback = 0
-wait_time = 0.863
-autostart = true
-
 [node name="WorldBoundry" type="Area2D" parent="."]
-position = Vector2(1103, 884)
+visible = false
+position = Vector2(1101, 884)
 script = ExtResource("3_ww8lp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundry"]
 position = Vector2(338, -72.75)
 shape = SubResource("RectangleShape2D_8eilv")
 
-[connection signal="timeout" from="spawner" to="Home" method="_on_timer_timeout"]
+[node name="Home4" parent="." instance=ExtResource("3_u110x")]
+position = Vector2(770, 552)
+
+[node name="Home2" parent="." instance=ExtResource("3_u110x")]
+position = Vector2(118, 139)

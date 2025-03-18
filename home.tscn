@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw85u7eokh4jt"]
+
+[ext_resource type="Script" path="res://scripts/home.gd" id="1_3ya2u"]
+
+[sub_resource type="Gradient" id="Gradient_32lhk"]
+colors = PackedColorArray(1, 0, 1, 1, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a5tj3"]
+gradient = SubResource("Gradient_32lhk")
+
+[node name="Home" type="Node2D"]
+
+[node name="Home" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_a5tj3")
+script = ExtResource("1_3ya2u")
+
+[node name="spawner" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.863
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="spawner" to="Home" method="_on_spawner_timeout"]
