@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4d55ku5nppw8"]
+[gd_scene load_steps=7 format=3 uid="uid://b4d55ku5nppw8"]
 
-[ext_resource type="Script" uid="uid://tnxshiewuujt" path="res://scripts/home.gd" id="2_f4nbc"]
+[ext_resource type="Script" path="res://scripts/home.gd" id="2_f4nbc"]
 [ext_resource type="PackedScene" uid="uid://cig2p7pbgrkqt" path="res://food.tscn" id="2_peged"]
+[ext_resource type="Script" path="res://scenes/world_boundry.gd" id="3_ww8lp"]
 
 [sub_resource type="Gradient" id="Gradient_32lhk"]
 colors = PackedColorArray(1, 0, 1, 1, 1, 0, 1, 1)
@@ -9,14 +10,24 @@ colors = PackedColorArray(1, 0, 1, 1, 1, 0, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7g83o"]
 gradient = SubResource("Gradient_32lhk")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8eilv"]
+size = Vector2(2874, 1619.5)
+
 [node name="World" type="Node2D"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, -1)
+rotation = 3.14159
+scale = Vector2(257.519, 3480.4)
+anchor_mode = 0
+zoom = Vector2(0.4, 0.4)
+
 [node name="Food" parent="." instance=ExtResource("2_peged")]
-position = Vector2(202, 154)
+position = Vector2(398, 829)
 scale = Vector2(1.90613, 1.84253)
 
 [node name="Home" type="Sprite2D" parent="."]
-position = Vector2(951, 429)
+position = Vector2(2284, 986)
 texture = SubResource("GradientTexture2D_7g83o")
 script = ExtResource("2_f4nbc")
 
@@ -25,7 +36,12 @@ process_callback = 0
 wait_time = 0.863
 autostart = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+[node name="WorldBoundry" type="Area2D" parent="."]
+position = Vector2(1103, 884)
+script = ExtResource("3_ww8lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundry"]
+position = Vector2(338, -72.75)
+shape = SubResource("RectangleShape2D_8eilv")
 
 [connection signal="timeout" from="spawner" to="Home" method="_on_timer_timeout"]

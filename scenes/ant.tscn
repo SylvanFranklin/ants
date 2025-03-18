@@ -455,16 +455,20 @@ motion_mode = 1
 script = ExtResource("1_l0lfl")
 
 [node name="FrameAnimation" type="AnimatedSprite2D" parent="."]
+rotation = 1.57079
 sprite_frames = SubResource("SpriteFrames_gmg07")
 autoplay = "default"
 frame_progress = 0.348641
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 21)
+rotation = 0.00873558
 shape = SubResource("CapsuleShape2D_cojho")
 
 [node name="MoneSquirter" type="Timer" parent="."]
 wait_time = 0.48
 autostart = true
+
+[node name="Timer" type="Timer" parent="."]
 
 [connection signal="timeout" from="MoneSquirter" to="." method="_on_mone_squirter_timeout"]

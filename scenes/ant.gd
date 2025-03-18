@@ -8,29 +8,23 @@ const SCRAP = preload("res://scrap.tscn")
 func _ready():
 	velocity = direction.normalized() * SPEED
 
-
 func _physics_process(delta: float) -> void:
-	if position.x < 0:
-		velocity.x *= -1
-	if position.x > 1152:
-		velocity.x *= -1
-	if position.y < 0:
-		velocity.y *= -1
-	if position.y > 648:
-		velocity.y *= -1
+	explore()
 		
-		
-		
+	velocity = direction.normalized() * SPEED;
+	look_at(global_position + direction)
 	position += velocity
-	#rotation = velocity.x
+	
 	#var collision = move_and_collide(velocity * delta)
-	#
 	#if collision:
 		#velocity = velocity.bounce(collision.get_normal())
 		#if collision.get_collider().has_method("hit"):
 			#collision.get_collider().hit()
 			
 	
+func explore() -> void: 
+	direction.x = sin(direction.x) * 2
+
 
 func _on_mone_squirter_timeout() -> void:
 	var mone = MONE.instantiate() 
