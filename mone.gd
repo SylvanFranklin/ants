@@ -8,7 +8,7 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(strength / 100)
+	#print(strength / 100)
 	sprite_2d.modulate.a = strength / 100
 	if strength == 0: 
 		queue_free()
