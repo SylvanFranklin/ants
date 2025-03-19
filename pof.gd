@@ -1,17 +1,14 @@
 extends Node2D
-@onready var area_2d: Area2D = $Area2D
+const FOOD = preload("res://food.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	for i in range(200):
+		var food = FOOD.instantiate()
+		food.position.x += i % 100;
+		food.position.y += i % 40;
+		add_child(food)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-	
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.has_method("eat"):
-		body.eat(self)

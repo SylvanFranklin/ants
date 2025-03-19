@@ -52,3 +52,12 @@ func pickup_scrap():
 	add_child(scrap)
 	scrap.position = position
 	
+func eat(node: Node2D):
+	if not state == State.HOMING:
+		var scrap = SCRAP.instantiate()
+		state = State.HOMING;
+		add_child(scrap)
+		node.queue_free()
+
+
+

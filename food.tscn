@@ -10,18 +10,23 @@ colors = PackedColorArray(0, 1, 0, 1)
 gradient = SubResource("Gradient_44h73")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l00cp"]
-size = Vector2(99.9145, 53.3201)
+size = Vector2(44.7475, 26.66)
 
 [node name="Food" type="Node2D"]
 script = ExtResource("1_7xbd5")
 
 [node name="Food" type="Sprite2D" parent="."]
 position = Vector2(-1, 0)
+scale = Vector2(0.171401, 0.173989)
 texture = SubResource("GradientTexture2D_4newj")
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.439999, 0.439999)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1, -4.76837e-07)
-scale = Vector2(0.680545, 1.2003)
+position = Vector2(-2.27274, 1.90735e-06)
+scale = Vector2(-0.566635, -0.942349)
 shape = SubResource("RectangleShape2D_l00cp")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4d55ku5nppw8"]
+[gd_scene load_steps=9 format=3 uid="uid://b4d55ku5nppw8"]
 
 [ext_resource type="PackedScene" uid="uid://cig2p7pbgrkqt" path="res://food.tscn" id="2_peged"]
 [ext_resource type="PackedScene" uid="uid://dw85u7eokh4jt" path="res://home.tscn" id="3_u110x"]
 [ext_resource type="Script" path="res://scenes/world_boundry.gd" id="3_ww8lp"]
+[ext_resource type="PackedScene" uid="uid://cf1fr5a3ep0rd" path="res://pof.tscn" id="4_krax2"]
 
 [sub_resource type="Gradient" id="Gradient_qjr8r"]
 offsets = PackedFloat32Array(0.035, 0.98, 1)
@@ -37,6 +38,7 @@ position = Vector2(-1, -1)
 rotation = 3.14159
 scale = Vector2(257.519, 3480.4)
 anchor_mode = 0
+zoom = Vector2(0.6, 0.6)
 
 [node name="Food" parent="." instance=ExtResource("2_peged")]
 position = Vector2(444, 330)
@@ -51,8 +53,8 @@ script = ExtResource("3_ww8lp")
 position = Vector2(338, -72.75)
 shape = SubResource("RectangleShape2D_8eilv")
 
-[node name="Home4" parent="." instance=ExtResource("3_u110x")]
-position = Vector2(770, 552)
-
 [node name="Home2" parent="." instance=ExtResource("3_u110x")]
-position = Vector2(118, 139)
+position = Vector2(1149, 690)
+
+[node name="POF" parent="." instance=ExtResource("4_krax2")]
+position = Vector2(317, 401)
