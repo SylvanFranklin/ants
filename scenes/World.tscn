@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4d55ku5nppw8"]
+[gd_scene load_steps=10 format=3 uid="uid://b4d55ku5nppw8"]
 
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_rrehp"]
 [ext_resource type="PackedScene" uid="uid://cig2p7pbgrkqt" path="res://food.tscn" id="2_peged"]
 [ext_resource type="PackedScene" uid="uid://dw85u7eokh4jt" path="res://home.tscn" id="3_u110x"]
 [ext_resource type="Script" path="res://scenes/world_boundry.gd" id="3_ww8lp"]
@@ -26,6 +27,7 @@ size = Vector2(2874, 1619.5)
 
 [node name="World" type="Node2D"]
 position = Vector2(-10, 0)
+script = ExtResource("1_rrehp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -45,7 +47,6 @@ position = Vector2(444, 330)
 scale = Vector2(1.90613, 1.84253)
 
 [node name="WorldBoundry" type="Area2D" parent="."]
-visible = false
 position = Vector2(1101, 884)
 script = ExtResource("3_ww8lp")
 
@@ -58,3 +59,6 @@ position = Vector2(1149, 690)
 
 [node name="POF" parent="." instance=ExtResource("4_krax2")]
 position = Vector2(317, 401)
+
+[connection signal="body_exited" from="WorldBoundry" to="Food" method="_on_world_boundry_body_exited"]
+[connection signal="body_exited" from="WorldBoundry" to="WorldBoundry" method="_on_body_exited"]

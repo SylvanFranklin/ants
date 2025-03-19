@@ -40,7 +40,7 @@ func explore() -> void:
 	else:
 		direction -= direction.orthogonal() * 0.4
 		
-	
+
 
 func _on_mone_squirter_timeout() -> void:
 	var mone = MONE.instantiate() 
