@@ -1,5 +1,5 @@
 extends CharacterBody2D
-const SPEED = 0.8
+const SPEED = 1
 @export var direction := Vector2(randf() * 2 - 1, randf() * 2 -1)
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 const MONE = preload("res://mone.tscn")
@@ -16,8 +16,7 @@ func _ready():
 	scrap.visible = false
 	
 func _physics_process(delta: float) -> void:
-	if randi() % 50 == 0: 
-		explore()
+	explore()
 		
 	velocity = direction.normalized() * SPEED;
 	look_at(global_position + direction)
@@ -31,28 +30,52 @@ func _physics_process(delta: float) -> void:
 			
 			
 func explore() -> void:
-	if randi() % 2 == 0:
-		direction += direction.orthogonal() * 0.4
-	else:
-		direction -= direction.orthogonal() * 0.4
+	if randi() % 50 == 0:
+		if randi() % 5 == 0:
+			direction += direction.orthogonal() * 0.4
+		else:
+			direction -= direction.orthogonal() * 0.4
+	
 	
 	var n = neighbors()
-	var lowest = INF
-	var chosen_nay
+	var lowest_h = INF
+	var lowest_f = INF
+	var chosen_nay_h
+	var chosen_nay_f
 	for nay in n:
-		if nay.distance_to_home < lowest:
-			chosen_nay = nay
-			if state == State.HOMING:
-				lowest = nay.distance_to_home
-			else:
-				lowest = nay.distance_to_food
+		if nay.distance_to_home < lowest_h:
+			lowest_h = nay.distance_to_home
+			chosen_nay_h = nay
+		if nay.distance_to_food < lowest_f:
+			lowest_f = nay.distance_to_food
+			chosen_nay_f = nay
 	
-	if chosen_nay:		
+	if chosen_nay_h and state == State.HOMING:		
 		var ant_pos = get_board_position()
-		var turn_dir = chosen_nay.pos - ant_pos
-		
-		if state == State.HOMING:
-			direction = turn_dir
+		var turn_dir = chosen_nay_h.pos - ant_pos
+		direction = turn_dir
+	if chosen_nay_f and state == State.SEEKING:
+		var ant_pos = get_board_position()
+		var turn_dir = chosen_nay_f.pos - ant_pos
+		direction = turn_dir
+	
+	#var n = neighbors()
+	#var lowest = INF
+	#var chosen_nay
+	#for nay in n:
+		#if nay.distance_to_home < lowest:
+			#chosen_nay = nay
+			#if state == State.HOMING:
+				#lowest = nay.distance_to_home
+			#else:
+				#lowest = nay.distance_to_food
+	#
+	#if chosen_nay:		
+		#var ant_pos = get_board_position()
+		#var turn_dir = chosen_nay.pos - ant_pos
+		#
+		#if state == State.HOMING:
+			#direction = turn_dir
 	
 func _on_mone_squirter_timeout() -> void:
 	distance_from_objective += 1
@@ -90,7 +113,7 @@ func eat(node: Node2D):
 func bank_that_food_yo(node: Node2D):
 	if not node.state == State.SEEKING:
 		state = State.SEEKING
-		scrap.visible = true	
+		scrap.visible = false	
 		distance_from_objective = 0
 		
 func get_board_position() -> Vector2:

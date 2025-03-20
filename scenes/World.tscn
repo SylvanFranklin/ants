@@ -72,6 +72,7 @@ position = Vector2(579, 327)
 position = Vector2(850, 589)
 
 [node name="GLOBAL_CLOCK" type="Timer" parent="."]
+wait_time = 0.5
 
 [connection signal="body_exited" from="WorldBoundry" to="WorldBoundry" method="_on_body_exited"]
 [connection signal="timeout" from="GLOBAL_CLOCK" to="." method="_on_global_clock_timeout"]
