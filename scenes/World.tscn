@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://b4d55ku5nppw8"]
 
-[ext_resource type="Script" path="res://scenes/world.gd" id="1_rrehp"]
+[ext_resource type="Script" uid="uid://c4r4x8aj4bsax" path="res://scenes/world.gd" id="1_rrehp"]
 [ext_resource type="Texture2D" uid="uid://db7aqgbx5wdll" path="res://sand.png" id="2_dg388"]
 [ext_resource type="PackedScene" uid="uid://dw85u7eokh4jt" path="res://home.tscn" id="3_u110x"]
-[ext_resource type="Script" path="res://scenes/world_boundry.gd" id="3_ww8lp"]
+[ext_resource type="Script" uid="uid://dbfoyhlaoj1fh" path="res://scenes/world_boundry.gd" id="3_ww8lp"]
 [ext_resource type="PackedScene" uid="uid://cf1fr5a3ep0rd" path="res://pof.tscn" id="4_krax2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ccr1g"]

@@ -52,7 +52,7 @@ func explore() -> void:
 		var turn_dir = chosen_nay.pos - ant_pos
 		
 		if state == State.HOMING:
-			direction += turn_dir
+			direction = turn_dir
 	
 func _on_mone_squirter_timeout() -> void:
 	distance_from_objective += 1
@@ -66,7 +66,10 @@ func _on_mone_squirter_timeout() -> void:
 	else:
 		var what_the_board_has = board[board_pos.x][board_pos.y].distance_to_food 
 		var what_we_have = distance_from_objective
+		print("we",what_we_have)
+		print("board",what_the_board_has)
 		board[board_pos.x][board_pos.y].distance_to_food = min(what_the_board_has, what_we_have)
+		print("update",min(what_the_board_has, what_we_have))
 		
 	var mone = MONE.instantiate() 
 	if state == State.SEEKING: 
@@ -75,18 +78,20 @@ func _on_mone_squirter_timeout() -> void:
 		mone.kind = 'food'
 			
 	get_parent().add_child(mone)# Replace with function body.
-	mone.position = position
+	mone.position = Vector2(10*floor(position.x/10),floor(position.y/10)*10)
 
 
 func eat(node: Node2D):
 	if not state == State.HOMING:
 		state = State.HOMING;
 		scrap.visible = true
+		distance_from_objective = 0
 		
 func bank_that_food_yo(node: Node2D):
 	if not node.state == State.SEEKING:
 		state = State.SEEKING
 		scrap.visible = true	
+		distance_from_objective = 0
 		
 func get_board_position() -> Vector2:
 	var x: int = floor(global_position.x / 10)
