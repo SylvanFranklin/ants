@@ -21,11 +21,4 @@ func _on_decay_timeout() -> void:
 	if strength > 0:
 		strength -= 1 # Replace with function body.
 		
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if kind == "food":
-		body.direction += (global_position - body.global_position) * 100
-	else: 
-		body.direction += (global_position - body.global_position) * 10
-
-	
 	

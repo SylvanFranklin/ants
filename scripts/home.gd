@@ -14,7 +14,10 @@ func spawn_ant():
 	get_parent().add_child(ant)
 	ant.position = position
 
-
 func _on_spawner_timeout() -> void:
 	for i in range(100):
 		spawn_ant()
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.has_method("bank_that_food_yo"):
+		body.bank_that_food_yo(body)

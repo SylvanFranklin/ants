@@ -1,7 +1,8 @@
-[gd_scene load_steps=67 format=3 uid="uid://cniwwdn3r1yuw"]
+[gd_scene load_steps=68 format=3 uid="uid://cniwwdn3r1yuw"]
 
 [ext_resource type="Script" path="res://scenes/ant.gd" id="1_l0lfl"]
 [ext_resource type="Texture2D" uid="uid://doas46bnjha81" path="res://visual/ant.png" id="2_ddf54"]
+[ext_resource type="PackedScene" uid="uid://ccvwgkulpjbym" path="res://scrap.tscn" id="3_58k7u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wauxh"]
 atlas = ExtResource("2_ddf54")
@@ -455,6 +456,7 @@ motion_mode = 1
 script = ExtResource("1_l0lfl")
 
 [node name="FrameAnimation" type="AnimatedSprite2D" parent="."]
+z_index = 2
 rotation = 1.57079
 sprite_frames = SubResource("SpriteFrames_gmg07")
 autoplay = "default"
@@ -470,6 +472,9 @@ shape = SubResource("CapsuleShape2D_cojho")
 wait_time = 0.48
 autostart = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="DistanceFromObjective" type="Timer" parent="."]
+
+[node name="scrap" parent="." instance=ExtResource("3_58k7u")]
+position = Vector2(75.0007, 0)
 
 [connection signal="timeout" from="MoneSquirter" to="." method="_on_mone_squirter_timeout"]

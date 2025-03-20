@@ -8,6 +8,7 @@ colors = PackedColorArray(0, 1, 0, 1)
 gradient = SubResource("Gradient_d1c63")
 
 [node name="scrap" type="Node2D"]
+z_index = 3
 
 [node name="Food" type="Sprite2D" parent="."]
 position = Vector2(-2, 0)
