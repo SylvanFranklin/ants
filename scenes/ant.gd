@@ -40,10 +40,13 @@ func explore() -> void:
 	else:
 		direction -= direction.orthogonal() * 0.4
 		
-
-
 func _on_mone_squirter_timeout() -> void:
 	var mone = MONE.instantiate() 
+	if state == State.SEEKING: 
+		mone.kind = 'seek'
+	else: 
+		mone.kind = 'food'
+			
 	get_parent().add_child(mone)# Replace with function body.
 	mone.position = position
 

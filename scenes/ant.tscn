@@ -461,7 +461,7 @@ autoplay = "default"
 frame_progress = 0.297715
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-25.0002, 15.0001)
+position = Vector2(-25.0003, 0)
 rotation = 0.00873558
 scale = Vector2(1.68438, -0.615147)
 shape = SubResource("CapsuleShape2D_cojho")
