@@ -3,7 +3,6 @@ extends Node2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @export var kind = "seek"
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -20,5 +19,3 @@ func _process(deslta: float) -> void:
 func _on_decay_timeout() -> void:
 	if strength > 0:
 		strength -= 1 # Replace with function body.
-		
-	

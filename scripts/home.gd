@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 const ANT = preload("res://scenes/ant.tscn")
 var counter = 0
 

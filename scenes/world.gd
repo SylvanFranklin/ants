@@ -1,5 +1,6 @@
 extends Node2D
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var grid: TileMapLayer = $GRID
 
 class Cell:
 	var distance_to_home = INF
@@ -20,7 +21,7 @@ class Cell:
 			distance_to_home = INF
 
 @export var board = []
-const CELL_SIZE = 10;
+const CELL_SIZE = 16;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,7 +35,6 @@ func _ready() -> void:
 			var cell = Cell.new()
 			cell.pos = Vector2(x, y)
 			row.append(cell)
-			
 		board.append(row)
 	
 

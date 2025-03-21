@@ -79,7 +79,7 @@ func explore() -> void:
 	
 func _on_mone_squirter_timeout() -> void:
 	distance_from_objective += 1
-	var board = get_parent().get_parent().board
+	var board = get_parent().board
 	var board_pos = get_board_position()
 	
 	if state == State.SEEKING:
@@ -117,13 +117,12 @@ func bank_that_food_yo(node: Node2D):
 		distance_from_objective = 0
 		
 func get_board_position() -> Vector2:
-	var x: int = floor(global_position.x / 10)
-	var y: int = floor(global_position.y / 10)
-	return Vector2(x, y)
-	
+	var x: int = floor(global_position.x / 16)
+	var y: int = floor(global_position.y / 16)
+	return Vector2(x, y)	
 
 func neighbors() -> Array: 
-	var board = get_parent().get_parent().board
+	var board = get_parent().board
 	var board_pos = get_board_position()
 	var n = []
 	var maxY = len(board[0])

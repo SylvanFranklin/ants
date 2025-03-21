@@ -1,6 +1,6 @@
 [gd_scene load_steps=68 format=3 uid="uid://cniwwdn3r1yuw"]
 
-[ext_resource type="Script" uid="uid://l65puklv03w1" path="res://scenes/ant.gd" id="1_l0lfl"]
+[ext_resource type="Script" path="res://scenes/ant.gd" id="1_l0lfl"]
 [ext_resource type="Texture2D" uid="uid://doas46bnjha81" path="res://visual/ant.png" id="2_ddf54"]
 [ext_resource type="PackedScene" uid="uid://ccvwgkulpjbym" path="res://scrap.tscn" id="3_58k7u"]
 
