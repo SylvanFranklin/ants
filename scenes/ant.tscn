@@ -1,8 +1,9 @@
-[gd_scene load_steps=68 format=3 uid="uid://cniwwdn3r1yuw"]
+[gd_scene load_steps=69 format=3 uid="uid://cniwwdn3r1yuw"]
 
 [ext_resource type="Script" path="res://scenes/ant.gd" id="1_l0lfl"]
 [ext_resource type="Texture2D" uid="uid://doas46bnjha81" path="res://visual/ant.png" id="2_ddf54"]
 [ext_resource type="PackedScene" uid="uid://ccvwgkulpjbym" path="res://scrap.tscn" id="3_58k7u"]
+[ext_resource type="PackedScene" uid="uid://cm632kr75a1fx" path="res://scanner.tscn" id="4_gd303"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wauxh"]
 atlas = ExtResource("2_ddf54")
@@ -451,31 +452,42 @@ radius = 54.0
 height = 194.0
 
 [node name="Ant" type="CharacterBody2D"]
+position = Vector2(-9, 5)
 scale = Vector2(0.199998, 0.199998)
 motion_mode = 1
 script = ExtResource("1_l0lfl")
 
 [node name="FrameAnimation" type="AnimatedSprite2D" parent="."]
 z_index = 2
+position = Vector2(-10.0001, 0)
 rotation = 1.57079
 sprite_frames = SubResource("SpriteFrames_gmg07")
 autoplay = "default"
 frame_progress = 0.297715
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-25.0003, 0)
+position = Vector2(-50.0005, 2.91042e-08)
 rotation = 0.00873558
 scale = Vector2(1.68438, -0.615147)
 shape = SubResource("CapsuleShape2D_cojho")
 
 [node name="MoneSquirter" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 autostart = true
-
-[node name="DistanceFromObjective" type="Timer" parent="."]
-wait_time = 0.5
 
 [node name="scrap" parent="." instance=ExtResource("3_58k7u")]
 position = Vector2(75.0007, 0)
+
+[node name="Scanner1" parent="." instance=ExtResource("4_gd303")]
+position = Vector2(155.002, -145.001)
+scale = Vector2(2.80002, 2.80002)
+
+[node name="Scanner2" parent="." instance=ExtResource("4_gd303")]
+position = Vector2(280.003, 0)
+scale = Vector2(2.80002, 2.80002)
+
+[node name="Scanner3" parent="." instance=ExtResource("4_gd303")]
+position = Vector2(150.001, 150.001)
+scale = Vector2(2.80002, 2.80002)
 
 [connection signal="timeout" from="MoneSquirter" to="." method="_on_mone_squirter_timeout"]

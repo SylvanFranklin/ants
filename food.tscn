@@ -20,13 +20,13 @@ position = Vector2(-1, 0)
 scale = Vector2(0.171401, 0.173989)
 texture = SubResource("GradientTexture2D_4newj")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="food" type="Area2D" parent="."]
 scale = Vector2(0.439999, 0.439999)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="food"]
 position = Vector2(-2.27274, 1.90735e-06)
 scale = Vector2(-0.566635, -0.942349)
 shape = SubResource("RectangleShape2D_l00cp")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="food" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="food" to="." method="_on_area_2d_body_entered"]

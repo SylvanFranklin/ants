@@ -1,8 +1,5 @@
 extends Node2D
 
-@export var distance_to_home: int;
-@export var distance_to_food: int;
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -7,6 +7,7 @@
 radius = 29.0172
 
 [node name="Home" type="Node2D"]
+z_index = 5
 script = ExtResource("1_3ya2u")
 
 [node name="AntHill" type="Sprite2D" parent="."]
@@ -20,10 +21,11 @@ wait_time = 0.863
 one_shot = true
 autostart = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="home" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="home"]
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_vdrvk")
 
 [connection signal="timeout" from="spawner" to="." method="_on_spawner_timeout"]
+[connection signal="body_entered" from="home" to="." method="_on_area_2d_body_entered"]

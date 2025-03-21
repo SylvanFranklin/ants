@@ -5,7 +5,6 @@ var counter = 0
 func _ready() -> void:
 	pass
 		
-		
 func _process(delta: float) -> void:
 	pass
 
@@ -19,5 +18,6 @@ func _on_spawner_timeout() -> void:
 		spawn_ant()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.has_method("bank_that_food_yo"):
-		body.bank_that_food_yo(body)
+	body.bank_that_food_yo(body)
+		
+

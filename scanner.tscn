@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm632kr75a1fx"]
+
+[ext_resource type="Script" path="res://scanner.gd" id="1_ftl7u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bruke"]
+radius = 25.318
+
+[node name="Scanner" type="Node2D"]
+script = ExtResource("1_ftl7u")
+
+[node name="scanner" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+
+[node name="shape" type="CollisionShape2D" parent="scanner"]
+shape = SubResource("CircleShape2D_bruke")
+
+[node name="reseter" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="area_entered" from="scanner" to="." method="_on_scanner_area_entered"]
+[connection signal="timeout" from="reseter" to="." method="_on_reseter_timeout"]
