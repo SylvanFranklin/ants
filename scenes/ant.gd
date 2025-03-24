@@ -13,6 +13,8 @@ var from_food: int = INF
 @onready var mone_squirter: Node2D = $MoneSquirter
 @onready var scrap: Node2D = $scrap
 @onready var scanner: CollisionShape2D = $scanner
+var nay_blacklist = []
+
 
 func _ready():
 	velocity = direction.normalized() * SPEED
@@ -82,9 +84,12 @@ func mone_scan():
 				min_value = nay.from_food
 				chosen_nay = nay
 				
-		if chosen_nay:
+		if chosen_nay and chosen_nay not in nay_blacklist:
 			direction = (chosen_nay.pos - boardinates(global_position))
-
+			if len(nay_blacklist) > 4:
+					nay_blacklist.clear()
+			
+			nay_blacklist.append(chosen_nay)
 			
 	elif state == State.HOMING: 
 		var min_value = INF
@@ -95,9 +100,14 @@ func mone_scan():
 				min_value = nay.from_home
 				chosen_nay = nay
 		
-		if chosen_nay:
+		if chosen_nay and chosen_nay not in nay_blacklist:
 			direction = (chosen_nay.pos - boardinates(global_position))
-		
+			if len(nay_blacklist) > 4:
+					nay_blacklist.clear()
+			
+			nay_blacklist.append(chosen_nay)
+			
+			
 func rangle_the_nays(pos):
 	var board = get_parent().board
 	var viewport_size = get_viewport_rect().size
@@ -111,3 +121,6 @@ func rangle_the_nays(pos):
 			nays.append(board[x][y])
 		
 	return nays
+
+
+

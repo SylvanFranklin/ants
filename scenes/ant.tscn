@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ccvwgkulpjbym" path="res://scrap.tscn" id="3_58k7u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wxq1p"]
-radius = 2.60831
+radius = 2.6083
 height = 5.21661
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wauxh"]
