@@ -3,27 +3,14 @@ extends Node2D
 @onready var grid: TileMapLayer = $GRID
 
 class Cell:
-	var distance_to_home = INF
-	var distance_to_food = INF
+	var from_home = INF
+	var from_food = INF
 	var pos: Vector2 = Vector2.ZERO
-	var timer_for_food_mone: int = 100
-	var timer_for_home_mone: int = 100
 	var node: Node2D;
-	
-	func decay_mones() -> void:
-		if timer_for_food_mone > 0:
-			timer_for_food_mone -= 1
-		else:
-			distance_to_food = INF
-			
-		if timer_for_home_mone > 0:
-			timer_for_home_mone -= 1
-		else:
-			distance_to_home = INF
 
 const CELLL = preload("res://celll.tscn")
 @export var board = []
-const CELL_SIZE = 16;
+const CELL_SIZE = 32;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,12 +34,17 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	for row in board:
 		for cell in row:
-			cell.node.modulate.a = 1 - cell.distance_to_home / 100
+			if cell.from_home == INF:
+				cell.node.modulate.a = 0.0
+			else:
+				cell.node.modulate = Color(500 / (2 + cell.from_home), 40, 500 / (2 + cell.from_food))
+				cell.node.modulate.a = 0.2
+		
+			
+			
 
 func _on_global_clock_timeout() -> void:
-	pass # Replace with function body.
-	
-	
-
-
-	
+	for row in board:
+		for cell in row:
+			cell.from_home += 1
+			cell.from_food += 1

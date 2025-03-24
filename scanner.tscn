@@ -16,7 +16,7 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_bruke")
 
 [node name="reseter" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 4.0
 
 [connection signal="area_entered" from="scanner" to="." method="_on_scanner_area_entered"]
 [connection signal="timeout" from="reseter" to="." method="_on_reseter_timeout"]

@@ -7,7 +7,7 @@ func _ready() -> void:
 		
 func _process(delta: float) -> void:
 	pass
-
+	
 func spawn_ant():
 	var ant = ANT.instantiate()
 	get_parent().add_child(ant)

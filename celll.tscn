@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://celll.gd" id="1_wtghg"]
 
 [sub_resource type="Gradient" id="Gradient_6i3jw"]
+offsets = PackedFloat32Array(0, 0.99)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_tphjj"]
 gradient = SubResource("Gradient_6i3jw")
@@ -15,4 +16,4 @@ script = ExtResource("1_wtghg")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture1D_tphjj")
 region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
+region_rect = Rect2(0, 0, 32, 32)
