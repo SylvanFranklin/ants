@@ -452,7 +452,7 @@ animations = [{
 
 [node name="Ant" type="CharacterBody2D"]
 z_index = 5
-scale = Vector2(1.92, 1.92)
+scale = Vector2(1.36, 1.36)
 script = ExtResource("1_l0lfl")
 
 [node name="scanner" type="CollisionShape2D" parent="."]

@@ -1,7 +1,7 @@
 extends Node2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var grid: TileMapLayer = $GRID
-@export var CELL_SIZE = 32;
+@export var CELL_SIZE = 16.0;
 @export var board = []
 const CELL = preload("res://cell.tscn")
 

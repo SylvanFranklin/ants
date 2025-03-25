@@ -24,7 +24,7 @@ func eat() -> void:
 	if food > 0:
 		food -= 1
 	else:
-		queue_free
+		queue_free()
+		
 	scale = Vector2(food, food) / scaler
-	sprite.rotate(0.1)
 

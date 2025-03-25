@@ -15,7 +15,7 @@ func spawn_ant():
 	ant.position = position
 
 func _on_spawner_timeout() -> void:
-	for i in range(100):
+	for i in range(300):
 		spawn_ant()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

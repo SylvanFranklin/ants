@@ -41,8 +41,8 @@ func _on_mone_squirter_timeout() -> void:
 	var board = get_parent().board
 	var pos = boardinates(mone_squirter.global_position)
 	mone_scan()
-	from_home += 3
-	from_food += 3
+	from_home += 10
+	from_food += 10
 
 	if state == State.SEEKING:
 		var bd = board[pos.x][pos.y].from_home

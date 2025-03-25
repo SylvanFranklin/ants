@@ -8,10 +8,8 @@ var size = 32.0
 @onready var border: Sprite2D = $Border
 @onready var mone: Sprite2D = $Mone
 var frequency = 0.0
-
 	
 func update():
-	margin = 1 / (from_home + from_food + 2)
 	frequency = min(frequency + 0.01, 0.6)
 	border.region_rect = Rect2(Vector2(0, 0), Vector2(size, size))
 	var blue: float = (13.0 / from_home)
@@ -21,5 +19,6 @@ func update():
 
 func _on_decayer_timeout() -> void:
 	frequency = max(0, frequency - 0.001)
+	from_food += 4
 	mone.modulate.a = frequency
 	
