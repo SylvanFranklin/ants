@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq1mimj2kwkql"]
+
+[ext_resource type="Script" path="res://cell.gd" id="1_ckdce"]
+
+[sub_resource type="Gradient" id="Gradient_7xyxp"]
+offsets = PackedFloat32Array(0.315)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tphjj"]
+gradient = SubResource("Gradient_7xyxp")
+width = 1
+
+[node name="Celll" type="Node2D"]
+z_index = 4
+script = ExtResource("1_ckdce")
+
+[node name="decayer" type="Timer" parent="."]
+wait_time = 0.8
+autostart = true
+
+[node name="Border" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(1.125, 1.125)
+texture = SubResource("GradientTexture1D_tphjj")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Mone" type="Sprite2D" parent="."]
+position = Vector2(-2.68221e-07, -2.68221e-07)
+scale = Vector2(0.84375, 0.84375)
+texture = SubResource("GradientTexture1D_tphjj")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[connection signal="timeout" from="decayer" to="." method="_on_decayer_timeout"]

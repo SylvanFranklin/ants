@@ -3,29 +3,27 @@
 [ext_resource type="Script" path="res://food.gd" id="1_7xbd5"]
 
 [sub_resource type="Gradient" id="Gradient_44h73"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 1, 0, 1)
+offsets = PackedFloat32Array(0.845)
+colors = PackedColorArray(0, 0.752941, 0.117647, 0.396078)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4newj"]
 gradient = SubResource("Gradient_44h73")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l00cp"]
-size = Vector2(44.7475, 26.66)
+size = Vector2(1.38637, 1.38637)
 
 [node name="Food" type="Node2D"]
 script = ExtResource("1_7xbd5")
 
 [node name="Food" type="Sprite2D" parent="."]
-position = Vector2(-1, 0)
-scale = Vector2(0.171401, 0.173989)
 texture = SubResource("GradientTexture2D_4newj")
+region_enabled = true
+region_rect = Rect2(0, 0, 1, 1)
 
 [node name="food" type="Area2D" parent="."]
 scale = Vector2(0.439999, 0.439999)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="food"]
-position = Vector2(-2.27274, 1.90735e-06)
-scale = Vector2(-0.566635, -0.942349)
 shape = SubResource("RectangleShape2D_l00cp")
 
 [connection signal="area_entered" from="food" to="." method="_on_area_2d_area_entered"]

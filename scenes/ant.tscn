@@ -470,19 +470,15 @@ sprite_frames = SubResource("SpriteFrames_gmg07")
 frame_progress = 0.297715
 
 [node name="MoneSquirter" type="Node2D" parent="."]
-position = Vector2(-8.85417, 1.26218e-29)
+position = Vector2(2.08333, 0)
 scale = Vector2(0.520833, 0.520833)
 
 [node name="TheClockWork" type="Timer" parent="MoneSquirter"]
-wait_time = 0.1
+wait_time = 0.2
 autostart = true
 
 [node name="scrap" parent="." instance=ExtResource("3_58k7u")]
 position = Vector2(6.24343, 0)
 scale = Vector2(0.0838732, 0.0829455)
 
-[node name="Distance" type="Timer" parent="."]
-wait_time = 0.2
-
 [connection signal="timeout" from="MoneSquirter/TheClockWork" to="." method="_on_mone_squirter_timeout"]
-[connection signal="timeout" from="Distance" to="." method="_on_distance_timeout"]

@@ -2,6 +2,7 @@ extends Node2D
 const ANT = preload("res://scenes/ant.tscn")
 var counter = 0
 
+
 func _ready() -> void:
 	pass
 		

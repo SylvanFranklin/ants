@@ -2,19 +2,17 @@ extends CharacterBody2D
 const SPEED = 3.0
 const offsets = [[1, 1], [1, -1], [-1, 1], [-1, -1], [1, 0], [0, 1], [-1, 0], [0, -1]]
 @export var direction := Vector2(randf() * 2 - 1, randf() * 2 -1)
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-const MONE = preload("res://mone.tscn")
-@onready var world_boundry: Area2D = $WorldBoundry
 enum State {SEEKING, HOMING}
 var state: State = State.SEEKING;
-@onready var frame_animation: AnimatedSprite2D = $FrameAnimation
-var from_home: int = -1;
+var from_home: int = 0;
 var from_food: int = INF
+var nay_blacklist = []
+
 @onready var mone_squirter: Node2D = $MoneSquirter
 @onready var scrap: Node2D = $scrap
 @onready var scanner: CollisionShape2D = $scanner
-var nay_blacklist = []
-
+@onready var frame_animation: AnimatedSprite2D = $FrameAnimation
+@onready var world_boundry: Area2D = $WorldBoundry
 
 func _ready():
 	velocity = direction.normalized() * SPEED
@@ -43,18 +41,21 @@ func _on_mone_squirter_timeout() -> void:
 	var board = get_parent().board
 	var pos = boardinates(mone_squirter.global_position)
 	mone_scan()
+	from_home += 3
+	from_food += 3
 
 	if state == State.SEEKING:
-		from_home += 1
 		var bd = board[pos.x][pos.y].from_home
 		board[pos.x][pos.y].from_home = min(bd, from_home)
+		board[pos.x][pos.y].update()
 	else: 
-		from_food += 1
 		var bd = board[pos.x][pos.y].from_food
 		board[pos.x][pos.y].from_food = min(bd, from_food)
+		board[pos.x][pos.y].update()
 	
 func boardinates(pos) -> Vector2:
-	return pos / 32.0
+	var CELL_SIZE = get_parent().CELL_SIZE
+	return pos / CELL_SIZE
 
 func eat(node: Node2D):
 	if not state == State.HOMING:
@@ -62,7 +63,7 @@ func eat(node: Node2D):
 		scrap.visible = true
 		direction *= -1
 		from_food = 0
-		node.queue_free()
+		node.eat()
 		
 func bank_that_food_yo(node: Node2D):
 	if not state == State.SEEKING:
@@ -85,7 +86,7 @@ func mone_scan():
 				chosen_nay = nay
 				
 		if chosen_nay and chosen_nay not in nay_blacklist:
-			direction = (chosen_nay.pos - boardinates(global_position))
+			direction = (chosen_nay.board_position - boardinates(global_position))
 			if len(nay_blacklist) > 4:
 					nay_blacklist.clear()
 			
@@ -101,12 +102,12 @@ func mone_scan():
 				chosen_nay = nay
 		
 		if chosen_nay and chosen_nay not in nay_blacklist:
-			direction = (chosen_nay.pos - boardinates(global_position))
+			direction = (chosen_nay.board_position - boardinates(global_position))
 			if len(nay_blacklist) > 4:
 					nay_blacklist.clear()
 			
 			nay_blacklist.append(chosen_nay)
-			
+		
 			
 func rangle_the_nays(pos):
 	var board = get_parent().board
@@ -121,6 +122,3 @@ func rangle_the_nays(pos):
 			nays.append(board[x][y])
 		
 	return nays
-
-
-
