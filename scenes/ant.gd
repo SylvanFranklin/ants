@@ -1,13 +1,15 @@
 extends CharacterBody2D
-const SPEED = 3.0
+var SPEED = 2.1
 const offsets = [[1, 1], [1, -1], [-1, 1], [-1, -1], [1, 0], [0, 1], [-1, 0], [0, -1]]
 @export var direction := Vector2(randf() * 2 - 1, randf() * 2 -1)
-enum State {SEEKING, HOMING}
+enum State {SEEKING, HOMING, EMPTY_HANDED}
 var state: State = State.SEEKING;
 var from_home: int = 0;
 var from_food: int = INF
 var nay_blacklist = []
-
+var home = Vector2(0, 0)
+@onready var clock: Timer = $MoneSquirter/TheClockWork
+@onready var respawn: Timer = $Respawn
 @onready var mone_squirter: Node2D = $MoneSquirter
 @onready var scrap: Node2D = $scrap
 @onready var scanner: CollisionShape2D = $scanner
@@ -17,18 +19,17 @@ var nay_blacklist = []
 func _ready():
 	velocity = direction.normalized() * SPEED
 	scrap.visible = false
+
 		
 func _process(delta: float) -> void:
 	explore()
-
+	SPEED = get_parent().speed
+	clock.wait_time = get_parent().mone_emission_speed
+	
 func _physics_process(delta: float) -> void:	
 	velocity = direction.normalized() * SPEED;
 	look_at(global_position + direction)
 	position += velocity * (randf() + 0.2) 
-	if randi() % 100 == 0: 
-		frame_animation.pause()
-	if randi() % 20 == 0:
-		frame_animation.play()
 
 func explore() -> void:
 	if randi() % 50 == 0:
@@ -40,18 +41,19 @@ func explore() -> void:
 func _on_mone_squirter_timeout() -> void:
 	var board = get_parent().board
 	var pos = boardinates(mone_squirter.global_position)
+	var cell = board[pos.x][pos.y]
+	
 	mone_scan()
-	from_home += 10
-	from_food += 10
-
-	if state == State.SEEKING:
-		var bd = board[pos.x][pos.y].from_home
-		board[pos.x][pos.y].from_home = min(bd, from_home)
-		board[pos.x][pos.y].update()
-	else: 
-		var bd = board[pos.x][pos.y].from_food
-		board[pos.x][pos.y].from_food = min(bd, from_food)
-		board[pos.x][pos.y].update()
+	from_home += 4
+	from_food += 5
+	turn_around()
+	if cell:
+		if state == State.SEEKING:
+			cell.from_home = min(cell.from_home, from_home)
+			cell.walk()
+		elif state == State.HOMING: 
+			cell.from_food = min(cell.from_food, from_food)
+			cell.walk()
 	
 func boardinates(pos) -> Vector2:
 	var CELL_SIZE = get_parent().CELL_SIZE
@@ -75,7 +77,6 @@ func bank_that_food_yo(node: Node2D):
 
 func mone_scan():
 	var nays = rangle_the_nays(scanner.global_position)
-	
 	if state == State.SEEKING:
 		var min_value = INF
 		var chosen_nay = null
@@ -87,12 +88,12 @@ func mone_scan():
 				
 		if chosen_nay and chosen_nay not in nay_blacklist:
 			direction = (chosen_nay.board_position - boardinates(global_position))
-			if len(nay_blacklist) > 4:
+			if len(nay_blacklist) > 5:
 					nay_blacklist.clear()
 			
 			nay_blacklist.append(chosen_nay)
 			
-	elif state == State.HOMING: 
+	elif state == State.HOMING or state == State.EMPTY_HANDED: 
 		var min_value = INF
 		var chosen_nay = null
 		
@@ -103,9 +104,8 @@ func mone_scan():
 		
 		if chosen_nay and chosen_nay not in nay_blacklist:
 			direction = (chosen_nay.board_position - boardinates(global_position))
-			if len(nay_blacklist) > 4:
+			if len(nay_blacklist) > 5:
 					nay_blacklist.clear()
-			
 			nay_blacklist.append(chosen_nay)
 		
 			
@@ -122,3 +122,14 @@ func rangle_the_nays(pos):
 			nays.append(board[x][y])
 		
 	return nays
+
+func turn_around():
+	var away = home.distance_to(global_position)
+	
+	if away > 500:
+		global_position = home
+		state = State.SEEKING
+		direction = Vector2(randf() * 2 -1, randf() * 2 -1)
+	elif away > 450:
+		state = State.EMPTY_HANDED
+

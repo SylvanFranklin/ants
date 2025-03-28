@@ -467,7 +467,8 @@ position = Vector2(2.60417, -4.76837e-07)
 rotation = 1.57079
 scale = Vector2(0.0821629, 0.083245)
 sprite_frames = SubResource("SpriteFrames_gmg07")
-frame_progress = 0.297715
+autoplay = "default"
+frame_progress = 0.534199
 
 [node name="MoneSquirter" type="Node2D" parent="."]
 position = Vector2(2.08333, 0)

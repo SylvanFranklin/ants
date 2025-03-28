@@ -17,8 +17,7 @@ texture = ExtResource("2_vjjho")
 
 [node name="spawner" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.863
-one_shot = true
+wait_time = 0.4
 autostart = true
 
 [node name="home" type="Area2D" parent="."]

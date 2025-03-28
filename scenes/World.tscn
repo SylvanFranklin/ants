@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4d55ku5nppw8"]
+[gd_scene load_steps=7 format=3 uid="uid://b4d55ku5nppw8"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_rrehp"]
 [ext_resource type="PackedScene" uid="uid://dw85u7eokh4jt" path="res://home.tscn" id="3_u110x"]
-[ext_resource type="Script" path="res://scenes/world_boundry.gd" id="3_ww8lp"]
 [ext_resource type="PackedScene" uid="uid://cig2p7pbgrkqt" path="res://food.tscn" id="4_32uta"]
 
 [sub_resource type="Gradient" id="Gradient_qjr8r"]
@@ -23,9 +22,6 @@ width = 516
 color_ramp = SubResource("Gradient_qjr8r")
 noise = SubResource("FastNoiseLite_bdaco")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8eilv"]
-size = Vector2(1852.38, 965.846)
-
 [node name="World" type="Node2D"]
 z_index = 4
 script = ExtResource("1_rrehp")
@@ -35,16 +31,7 @@ position = Vector2(1026, 643)
 scale = Vector2(6.38672, 3.50293)
 texture = SubResource("NoiseTexture2D_8iku8")
 
-[node name="WorldBoundry" type="Area2D" parent="."]
-position = Vector2(872, 950)
-script = ExtResource("3_ww8lp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundry"]
-position = Vector2(78.95, -423.831)
-scale = Vector2(0.8, 0.782383)
-shape = SubResource("RectangleShape2D_8eilv")
-
-[node name="Home2" parent="." instance=ExtResource("3_u110x")]
+[node name="Home" parent="." instance=ExtResource("3_u110x")]
 position = Vector2(729, 582)
 
 [node name="GLOBAL_CLOCK" type="Timer" parent="."]
@@ -53,8 +40,49 @@ wait_time = 0.5
 [node name="Food" parent="." instance=ExtResource("4_32uta")]
 position = Vector2(1051, 775)
 
-[node name="Food2" parent="." instance=ExtResource("4_32uta")]
-position = Vector2(1264, 439)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(967, 538)
+scale = Vector2(5.15811, -19.7135)
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
 
-[connection signal="body_exited" from="WorldBoundry" to="WorldBoundry" method="_on_body_exited"]
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1435.0
+offset_top = 2.0
+offset_right = 1835.0
+offset_bottom = 302.0
+grow_horizontal = 0
+scale = Vector2(1.20395, 1.09352)
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 2
+offset_right = 500.0
+offset_bottom = 300.0
+
+[node name="Speed" type="HSlider" parent="Control/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+max_value = 10.0
+step = 0.3
+value = 3.0
+tick_count = 20
+
+[node name="Mones" type="HSlider" parent="Control/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+min_value = 0.001
+max_value = 0.4
+step = 0.01
+value = 0.4
+
 [connection signal="timeout" from="GLOBAL_CLOCK" to="." method="_on_global_clock_timeout"]
+[connection signal="value_changed" from="Control/VBoxContainer/Speed" to="." method="_on_speed_value_changed"]
+[connection signal="value_changed" from="Control/VBoxContainer/Mones" to="." method="_on_mones_value_changed"]
