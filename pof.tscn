@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cf1fr5a3ep0rd"]
 
-[ext_resource type="Script" path="res://pof.gd" id="1_m7d8r"]
+[ext_resource type="Script" uid="uid://xcrat0xu07xu" path="res://pof.gd" id="1_m7d8r"]
 
 [node name="POF" type="Node2D"]
 script = ExtResource("1_m7d8r")

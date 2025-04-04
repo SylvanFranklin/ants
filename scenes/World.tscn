@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4d55ku5nppw8"]
+[gd_scene load_steps=8 format=3 uid="uid://b4d55ku5nppw8"]
 
-[ext_resource type="Script" path="res://scenes/world.gd" id="1_rrehp"]
+[ext_resource type="Script" uid="uid://c4r4x8aj4bsax" path="res://scenes/world.gd" id="1_rrehp"]
 [ext_resource type="PackedScene" uid="uid://dw85u7eokh4jt" path="res://home.tscn" id="3_u110x"]
 [ext_resource type="PackedScene" uid="uid://cig2p7pbgrkqt" path="res://food.tscn" id="4_32uta"]
+[ext_resource type="PackedScene" uid="uid://cghjjw5xkydsh" path="res://wall.tscn" id="4_d1c63"]
 
 [sub_resource type="Gradient" id="Gradient_qjr8r"]
 offsets = PackedFloat32Array(0.035, 1)
@@ -39,6 +40,12 @@ wait_time = 0.5
 
 [node name="Food" parent="." instance=ExtResource("4_32uta")]
 position = Vector2(1051, 775)
+
+[node name="Food2" parent="." instance=ExtResource("4_32uta")]
+position = Vector2(281, 304)
+
+[node name="Food3" parent="." instance=ExtResource("4_32uta")]
+position = Vector2(306, 733)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(967, 538)
@@ -82,6 +89,9 @@ min_value = 0.001
 max_value = 0.4
 step = 0.01
 value = 0.4
+
+[node name="wall" parent="." instance=ExtResource("4_d1c63")]
+position = Vector2(981, 472)
 
 [connection signal="timeout" from="GLOBAL_CLOCK" to="." method="_on_global_clock_timeout"]
 [connection signal="value_changed" from="Control/VBoxContainer/Speed" to="." method="_on_speed_value_changed"]

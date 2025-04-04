@@ -4,6 +4,7 @@ var from_home = 999
 var from_food = INF
 var board_position: Vector2
 var size = 32.0
+var pulse = 1.3
 @export var margin = 0.6
 @onready var border: Sprite2D = $Border
 @onready var mone: Sprite2D = $Mone
@@ -15,6 +16,11 @@ func update():
 	var green: float = (13.0 / from_food)
 	var red: float = (blue + green / 2)
 	mone.modulate = Color(0.0, green, blue, frequency)
+	
+	if mone.scale.x < size:
+		mone.scale *= 1.001
+	else:
+		mone.scale /= 1.001
 
 func walk():
 	frequency = min(frequency + 0.01, 0.6)

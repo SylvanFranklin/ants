@@ -29,7 +29,8 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:	
 	velocity = direction.normalized() * SPEED;
 	look_at(global_position + direction)
-	position += velocity * (randf() + 0.2) 
+	if move_and_collide(velocity * 100 * delta):
+		direction *= -1
 
 func explore() -> void:
 	if randi() % 50 == 0:
